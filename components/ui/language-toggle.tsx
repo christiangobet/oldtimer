@@ -23,22 +23,23 @@ export function LanguageToggle({
   inactiveLabel,
 }: LanguageToggleProps) {
   const pathname = usePathname();
-  const [currentHash, setCurrentHash] = useState(hash ?? "");
+  const [liveHash, setLiveHash] = useState(() =>
+    typeof window === "undefined" ? "" : window.location.hash,
+  );
   const alternateLocale = getAlternateLocale(locale);
+  const currentHash = hash ?? liveHash;
   const alternatePath = getAlternatePathname(pathname, locale, alternateLocale);
   const href = `${alternatePath}${currentHash}`;
 
   useEffect(() => {
     if (hash !== undefined) {
-      setCurrentHash(hash);
       return;
     }
 
     const updateHash = () => {
-      setCurrentHash(window.location.hash);
+      setLiveHash(window.location.hash);
     };
 
-    updateHash();
     window.addEventListener("hashchange", updateHash);
 
     return () => {
