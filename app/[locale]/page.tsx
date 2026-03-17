@@ -26,7 +26,7 @@ export default async function LocalizedPage({ params }: LocalizedPageProps) {
   const content = getSiteContent(locale);
 
   return (
-    <main className="relative overflow-hidden pb-24">
+    <main className="relative overflow-hidden pb-24" lang={locale}>
       <SiteHeader
         locale={locale}
         navigationLinks={content.navigationLinks}

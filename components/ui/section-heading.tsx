@@ -17,7 +17,7 @@ export function SectionHeading({
     <div className={`flex max-w-3xl flex-col gap-4 ${alignment}`}>
       {eyebrow ? <p className="section-label">{eyebrow}</p> : null}
       <div className="space-y-4">
-        <h2 className="font-display text-4xl leading-none tracking-[0.02em] text-foreground sm:text-5xl">
+        <h2 className="font-display text-[1.85rem] leading-[1.05] tracking-[0.02em] text-foreground [hyphens:auto] [overflow-wrap:break-word] sm:text-4xl sm:leading-none lg:text-5xl">
           {title}
         </h2>
         {description ? <p className="section-kicker text-base sm:text-lg">{description}</p> : null}

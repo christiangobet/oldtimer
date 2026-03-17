@@ -14,7 +14,7 @@ export function RequestSection({ content, formContent }: RequestSectionProps) {
         <Reveal>
           <div className="surface-panel h-full rounded-[1.75rem] p-8 sm:p-10">
             <p className="section-label">{content.eyebrow}</p>
-            <h2 className="mt-5 font-display text-5xl leading-[0.96] text-foreground">
+            <h2 className="mt-5 font-display text-[1.85rem] leading-[1.05] text-foreground [hyphens:auto] [overflow-wrap:break-word] sm:text-4xl sm:leading-[0.96] lg:text-5xl">
               {content.title}
             </h2>
             <p className="mt-6 max-w-xl text-base leading-8 text-muted">
