@@ -1,8 +1,12 @@
 import { Reveal } from "@/components/ui/reveal";
 import { StatPill } from "@/components/ui/stat-pill";
-import { metrics } from "@/lib/site";
+import type { Metric } from "@/lib/site";
 
-export function MetricsStrip() {
+type MetricsStripProps = {
+  metrics: readonly Metric[];
+};
+
+export function MetricsStrip({ metrics }: MetricsStripProps) {
   return (
     <section className="section-shell pb-12 sm:pb-20">
       <Reveal>

@@ -1,20 +1,23 @@
 import { RequestForm } from "@/components/request-form";
 import { Reveal } from "@/components/ui/reveal";
+import type { SiteContent } from "@/lib/site";
 
-export function RequestSection() {
+type RequestSectionProps = {
+  content: SiteContent["requestSection"];
+};
+
+export function RequestSection({ content }: RequestSectionProps) {
   return (
     <section id="request" className="section-shell section-padding">
       <div className="grid gap-8 lg:grid-cols-[0.78fr_1.22fr]">
         <Reveal>
           <div className="surface-panel h-full rounded-[1.75rem] p-8 sm:p-10">
-            <p className="section-label">Request a Part</p>
+            <p className="section-label">{content.eyebrow}</p>
             <h2 className="mt-5 font-display text-5xl leading-[0.96] text-foreground">
-              Tell us what failed, what vehicle it belongs to, and what the restoration can’t wait
-              on.
+              {content.title}
             </h2>
             <p className="mt-6 max-w-xl text-base leading-8 text-muted">
-              We built this first release as a focused frontend experience so workshops can preview
-              the request flow before backend handling is introduced.
+              {content.description}
             </p>
           </div>
         </Reveal>

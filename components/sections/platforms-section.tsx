@@ -1,21 +1,26 @@
 import Image from "next/image";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { supportedPlatforms } from "@/lib/site";
+import type { Platform, SiteContent } from "@/lib/site";
 
-export function PlatformsSection() {
+type PlatformsSectionProps = {
+  content: SiteContent["platformsSection"];
+  platforms: readonly Platform[];
+};
+
+export function PlatformsSection({ content, platforms }: PlatformsSectionProps) {
   return (
     <section id="platforms" className="section-shell section-padding">
       <Reveal>
         <SectionHeading
-          eyebrow="Supported Platforms"
-          title="Curated marque coverage for restorations that still deserve the right part."
-          description="We focus on heritage platforms where geometry, finish, and fit can’t be treated like commodity inventory."
+          eyebrow={content.eyebrow}
+          title={content.title}
+          description={content.description}
         />
       </Reveal>
 
       <div className="mt-10 grid gap-6 lg:grid-cols-2">
-        {supportedPlatforms.map((platform, index) => (
+        {platforms.map((platform, index) => (
           <Reveal key={platform.name} delay={index * 0.08}>
             <article className="surface-panel group overflow-hidden rounded-[1.75rem]">
               <div className="relative h-72 overflow-hidden">

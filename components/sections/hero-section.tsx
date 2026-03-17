@@ -2,8 +2,13 @@ import Image from "next/image";
 import { GrainOverlay } from "@/components/ui/grain-overlay";
 import { OutlineButton } from "@/components/ui/outline-button";
 import { Reveal } from "@/components/ui/reveal";
+import type { SiteContent } from "@/lib/site";
 
-export function HeroSection() {
+type HeroSectionProps = {
+  content: SiteContent["hero"];
+};
+
+export function HeroSection({ content }: HeroSectionProps) {
   return (
     <section
       id="top"
@@ -13,23 +18,21 @@ export function HeroSection() {
         <GrainOverlay />
         <div className="grid items-end gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <Reveal className="relative z-10">
-            <p className="section-label">Heritage Components, Precisely Rebuilt</p>
+            <p className="section-label">{content.eyebrow}</p>
             <h1 className="mt-5 max-w-3xl font-display text-5xl leading-[0.92] tracking-[0.02em] text-foreground sm:text-6xl lg:text-7xl">
-              Precision-made replacements for the parts restoration catalogs forgot.
+              {content.title}
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-8 text-muted sm:text-lg">
-              OldPart Precision works with collectors and specialist workshops to reverse-engineer,
-              machine, and finish rare heritage vehicle components without sacrificing fit, feel, or
-              visual restraint.
+              {content.description}
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <a
                 href="#request"
                 className="inline-flex min-h-11 items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-black transition hover:brightness-110"
               >
-                Request a Quote
+                {content.primaryCtaLabel}
               </a>
-              <OutlineButton href="#process">See the Process</OutlineButton>
+              <OutlineButton href="#process">{content.secondaryCtaLabel}</OutlineButton>
             </div>
           </Reveal>
 
@@ -58,13 +61,14 @@ export function HeroSection() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 </div>
                 <div className="surface-panel rounded-[1.5rem] p-6">
-                  <p className="text-xs uppercase tracking-[0.24em] text-accent">Workshop Note</p>
+                  <p className="text-xs uppercase tracking-[0.24em] text-accent">
+                    {content.workshopNoteLabel}
+                  </p>
                   <p className="mt-4 font-display text-3xl text-foreground">
-                    Rare geometry deserves measured replacements, not guesswork.
+                    {content.workshopNoteTitle}
                   </p>
                   <p className="mt-4 text-sm leading-7 text-muted">
-                    Our process stays narrow, documented, and deliberately low-volume so each part
-                    earns its place on the car.
+                    {content.workshopNoteDescription}
                   </p>
                 </div>
               </div>

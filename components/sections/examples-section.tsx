@@ -1,21 +1,26 @@
 import Image from "next/image";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { exampleParts } from "@/lib/site";
+import type { ExamplePart, SiteContent } from "@/lib/site";
 
-export function ExamplesSection() {
+type ExamplesSectionProps = {
+  content: SiteContent["examplesSection"];
+  parts: readonly ExamplePart[];
+};
+
+export function ExamplesSection({ content, parts }: ExamplesSectionProps) {
   return (
     <section id="examples" className="section-shell section-padding pt-0">
       <Reveal>
         <SectionHeading
-          eyebrow="Example Parts"
-          title="Proof points from the kind of components that usually stall a restoration."
-          description="Each example represents a narrow, workshop-led manufacturing problem solved with measured documentation instead of guesswork."
+          eyebrow={content.eyebrow}
+          title={content.title}
+          description={content.description}
         />
       </Reveal>
 
       <div className="mt-10 grid gap-6 lg:grid-cols-2">
-        {exampleParts.map((part, index) => (
+        {parts.map((part, index) => (
           <Reveal key={part.name} delay={index * 0.08}>
             <article className="surface-panel grid overflow-hidden rounded-[1.75rem] md:grid-cols-[0.9fr_1.1fr]">
               <div className="relative min-h-72">
@@ -35,7 +40,7 @@ export function ExamplesSection() {
                   <p className="mt-4 text-sm leading-7 text-muted sm:text-base">{part.note}</p>
                 </div>
                 <p className="mt-8 border-t border-border pt-4 text-sm uppercase tracking-[0.2em] text-foreground/80">
-                  Built for low-volume, restoration-first workflows
+                  {content.footerLabel}
                 </p>
               </div>
             </article>
