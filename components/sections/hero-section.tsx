@@ -18,8 +18,8 @@ export function HeroSection({ content }: HeroSectionProps) {
         <GrainOverlay />
         <div className="grid items-end gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <Reveal className="relative z-10">
-            <p className="section-label">{content.eyebrow}</p>
-            <h1 className="mt-5 max-w-3xl font-display text-5xl leading-[0.92] tracking-[0.02em] text-foreground sm:text-6xl lg:text-7xl">
+            <p className="section-label line-clamp-2">{content.eyebrow}</p>
+            <h1 className="mt-5 max-w-3xl font-display text-[2.4rem] leading-[0.92] tracking-[0.02em] text-foreground sm:text-5xl lg:text-7xl">
               {content.title}
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-8 text-muted sm:text-lg">

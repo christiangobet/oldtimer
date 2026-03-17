@@ -77,6 +77,7 @@ export function RequestForm({ content = getSiteContent("en").requestForm }: Requ
         <Field
           label={content.labels.name}
           name="name"
+          autoComplete="name"
           value={values.name}
           error={errors.name}
           onChange={(value) => updateField("name", value)}
@@ -85,6 +86,7 @@ export function RequestForm({ content = getSiteContent("en").requestForm }: Requ
           label={content.labels.email}
           name="email"
           type="email"
+          autoComplete="email"
           value={values.email}
           error={errors.email}
           onChange={(value) => updateField("email", value)}
@@ -128,13 +130,13 @@ export function RequestForm({ content = getSiteContent("en").requestForm }: Requ
         onChange={(value) => updateField("partDescription", value)}
       />
 
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <p className="max-w-md text-sm leading-7 text-muted">
+      <div className="flex flex-col gap-3">
+        <p className="text-sm leading-7 text-muted">
           {content.helperText}
         </p>
         <button
           type="submit"
-          className="inline-flex min-h-11 items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-black transition hover:brightness-110"
+          className="inline-flex w-full min-h-12 cursor-pointer items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-black transition hover:brightness-110"
         >
           {content.submitLabel}
         </button>
@@ -155,10 +157,11 @@ type FieldProps = {
   value: string;
   error?: string;
   type?: string;
+  autoComplete?: string;
   onChange: (value: string) => void;
 };
 
-function Field({ label, name, value, error, type = "text", onChange }: FieldProps) {
+function Field({ label, name, value, error, type = "text", autoComplete, onChange }: FieldProps) {
   return (
     <label className="grid gap-2 text-sm text-foreground">
       <span className="uppercase tracking-[0.18em] text-muted">{label}</span>
@@ -166,8 +169,9 @@ function Field({ label, name, value, error, type = "text", onChange }: FieldProp
         type={type}
         name={name}
         value={value}
+        autoComplete={autoComplete}
         onChange={(event) => onChange(event.target.value)}
-        className="min-h-12 rounded-2xl border border-border bg-black/20 px-4 text-base text-foreground placeholder:text-muted/60"
+        className="min-h-12 rounded-2xl border border-border bg-white/6 px-4 text-base text-foreground placeholder:text-muted/60 transition hover:border-accent/40 focus:border-accent/60 focus:outline-none"
         aria-invalid={error ? "true" : "false"}
         aria-describedby={error ? `${name}-error` : undefined}
       />
@@ -180,7 +184,7 @@ function Field({ label, name, value, error, type = "text", onChange }: FieldProp
   );
 }
 
-type SelectFieldProps = FieldProps & {
+type SelectFieldProps = Omit<FieldProps, "type" | "autoComplete"> & {
   options: readonly string[];
   placeholder: string;
 };
@@ -197,21 +201,40 @@ function SelectField({
   return (
     <label className="grid gap-2 text-sm text-foreground">
       <span className="uppercase tracking-[0.18em] text-muted">{label}</span>
-      <select
-        name={name}
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
-        className="min-h-12 rounded-2xl border border-border bg-black/20 px-4 text-base text-foreground"
-        aria-invalid={error ? "true" : "false"}
-        aria-describedby={error ? `${name}-error` : undefined}
-      >
-        <option value="">{placeholder}</option>
-        {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
+      <div className="relative">
+        <select
+          name={name}
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
+          className="w-full min-h-12 appearance-none cursor-pointer rounded-2xl border border-border bg-white/6 px-4 pr-10 text-base text-foreground transition hover:border-accent/40 focus:border-accent/60 focus:outline-none"
+          aria-invalid={error ? "true" : "false"}
+          aria-describedby={error ? `${name}-error` : undefined}
+        >
+          <option value="">{placeholder}</option>
+          {options.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+        {/* Custom chevron */}
+        <svg
+          className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-muted"
+          width="14"
+          height="14"
+          viewBox="0 0 14 14"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M2.5 5L7 9.5L11.5 5"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </div>
       {error ? (
         <span id={`${name}-error`} className="text-sm text-[#f2b7a5]">
           {error}
@@ -221,7 +244,7 @@ function SelectField({
   );
 }
 
-type TextAreaFieldProps = Omit<FieldProps, "type">;
+type TextAreaFieldProps = Omit<FieldProps, "type" | "autoComplete">;
 
 function TextAreaField({ label, name, value, error, onChange }: TextAreaFieldProps) {
   return (
@@ -232,7 +255,7 @@ function TextAreaField({ label, name, value, error, onChange }: TextAreaFieldPro
         value={value}
         onChange={(event) => onChange(event.target.value)}
         rows={6}
-        className="rounded-[1.5rem] border border-border bg-black/20 px-4 py-3 text-base text-foreground placeholder:text-muted/60"
+        className="rounded-[1.5rem] border border-border bg-white/6 px-4 py-3 text-base text-foreground placeholder:text-muted/60 transition hover:border-accent/40 focus:border-accent/60 focus:outline-none"
         aria-invalid={error ? "true" : "false"}
         aria-describedby={error ? `${name}-error` : undefined}
       />

@@ -22,7 +22,7 @@ export function PlatformsSection({ content, platforms }: PlatformsSectionProps) 
       <div className="mt-10 grid gap-6 lg:grid-cols-2">
         {platforms.map((platform, index) => (
           <Reveal key={platform.name} delay={index * 0.08}>
-            <article className="surface-panel group overflow-hidden rounded-[1.75rem]">
+            <article className="surface-panel group cursor-pointer overflow-hidden rounded-[1.75rem] border border-border transition-colors duration-300 hover:border-accent/40">
               <div className="relative h-72 overflow-hidden">
                 <Image
                   src={platform.image}

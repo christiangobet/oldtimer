@@ -1,5 +1,6 @@
 import { OutlineButton } from "@/components/ui/outline-button";
 import { LanguageToggle } from "@/components/ui/language-toggle";
+import { MobileMenu } from "@/components/ui/mobile-menu";
 import type { Locale } from "@/lib/i18n";
 import type { NavigationLink, SiteContent } from "@/lib/site";
 
@@ -39,9 +40,10 @@ export function SiteHeader({
             activeLabel={languageToggle.activeLabel}
             inactiveLabel={languageToggle.inactiveLabel}
           />
-          <OutlineButton href="#request" className="hidden sm:inline-flex">
-            {ctaLabel}
-          </OutlineButton>
+          <div className="hidden sm:block">
+            <OutlineButton href="#request">{ctaLabel}</OutlineButton>
+          </div>
+          <MobileMenu navigationLinks={navigationLinks} ctaLabel={ctaLabel} />
         </div>
       </div>
     </header>
