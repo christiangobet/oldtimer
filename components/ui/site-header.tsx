@@ -20,7 +20,7 @@ export function SiteHeader() {
           ))}
         </nav>
         <OutlineButton href="#request" className="hidden sm:inline-flex">
-          Request a Quote
+          Start Inquiry
         </OutlineButton>
       </div>
     </header>

@@ -2,6 +2,28 @@
 
 Single-page `Next.js` landing page for a heritage automotive precision-parts brand.
 
+## Local Setup
+
+Install dependencies:
+
+```bash
+pnpm install
+```
+
+Start the development server:
+
+```bash
+pnpm dev
+```
+
+Run the verification commands:
+
+```bash
+pnpm vitest run
+pnpm lint
+pnpm build
+```
+
 ## Image Attribution
 
 All imagery in `public/images/` was downloaded from Pexels and is intended to stay within Pexels' free-to-use licensing terms for commercial and editorial web use. Verify current license terms before redistribution outside this project.

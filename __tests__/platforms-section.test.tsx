@@ -4,5 +4,5 @@ import HomePage from "@/app/page";
 
 it("renders supported platform cards", () => {
   render(<HomePage />);
-  expect(screen.getByText(/porsche/i)).toBeInTheDocument();
+  expect(screen.getByRole("heading", { name: /porsche/i })).toBeInTheDocument();
 });

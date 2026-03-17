@@ -27,6 +27,10 @@ html {
   scroll-behavior: smooth;
 }
 
+[id] {
+  scroll-margin-top: 7rem;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -71,6 +75,11 @@ input,
 select,
 textarea {
   font: inherit;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: color-mix(in srgb, var(--muted) 72%, transparent);
 }
 
 :focus-visible {
