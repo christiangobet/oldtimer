@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 
@@ -19,12 +19,17 @@ export function Reveal({
 }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
-  // amount: 0 = trigger as soon as 1px is visible
-  // margin fires 120px before element enters viewport — fixes Safari timing issue
-  // where IntersectionObserver fires before layout is complete
+  // Only enable animations after client hydration.
+  // Before hydration, render content visible — this prevents Safari (and slow
+  // JS environments) from getting stuck on opacity:0 if the IntersectionObserver
+  // fires before React's first paint cycle completes.
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => { setHydrated(true); }, []);
+
   const isInView = useInView(ref, { once: true, amount: 0, margin: "0px 0px 120px 0px" });
 
-  if (prefersReducedMotion) {
+  // Before JS hydration or reduced-motion: show immediately, no animation
+  if (!hydrated || prefersReducedMotion) {
     return <div className={className}>{children}</div>;
   }
 
