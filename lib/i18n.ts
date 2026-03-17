@@ -7,3 +7,7 @@ export const defaultLocale: Locale = "de";
 export function isSupportedLocale(value: string): value is Locale {
   return supportedLocales.includes(value as Locale);
 }
+
+export function getAlternateLocale(locale: Locale): Locale {
+  return locale === "de" ? "en" : "de";
+}

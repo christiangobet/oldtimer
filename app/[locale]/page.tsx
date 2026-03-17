@@ -8,6 +8,7 @@ import { PlatformsSection } from "@/components/sections/platforms-section";
 import { ProcessSection } from "@/components/sections/process-section";
 import { RequestSection } from "@/components/sections/request-section";
 import { SustainabilitySection } from "@/components/sections/sustainability-section";
+import { SiteHeader } from "@/components/ui/site-header";
 
 type LocalizedPageProps = {
   params: Promise<{
@@ -26,6 +27,12 @@ export default async function LocalizedPage({ params }: LocalizedPageProps) {
 
   return (
     <main className="relative overflow-hidden pb-24">
+      <SiteHeader
+        locale={locale}
+        navigationLinks={content.navigationLinks}
+        ctaLabel={content.header.ctaLabel}
+        languageToggle={content.languageToggle}
+      />
       <HeroSection content={content.hero} />
       <MetricsStrip metrics={content.metrics} />
       <ProcessSection content={content.processSection} steps={content.processSteps} />

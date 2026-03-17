@@ -199,6 +199,6 @@ export const deContent: SiteContent = {
   },
   languageToggle: {
     activeLabel: "Deutsch",
-    inactiveLabel: "Englisch",
+    inactiveLabel: "English",
   },
 };
