@@ -1,0 +1,17 @@
+import { Reveal } from "@/components/ui/reveal";
+import { StatPill } from "@/components/ui/stat-pill";
+import { metrics } from "@/lib/site";
+
+export function MetricsStrip() {
+  return (
+    <section className="section-shell pb-12 sm:pb-20">
+      <Reveal>
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {metrics.map((metric) => (
+            <StatPill key={metric.label} value={metric.value} label={metric.label} />
+          ))}
+        </div>
+      </Reveal>
+    </section>
+  );
+}
