@@ -41,7 +41,7 @@ export default async function LocalizedPage({ params }: LocalizedPageProps) {
         platforms={content.supportedPlatforms}
       />
       <ExamplesSection content={content.examplesSection} parts={content.exampleParts} />
-      <RequestSection content={content.requestSection} />
+      <RequestSection content={content.requestSection} formContent={content.requestForm} />
       <SustainabilitySection
         content={content.sustainabilitySection}
         bullets={content.sustainabilityBullets}

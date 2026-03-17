@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { formOptions } from "@/lib/site";
+import { getSiteContent, type RequestFormContent } from "@/lib/site";
 
 type FormValues = {
   name: string;
@@ -21,7 +21,11 @@ const initialValues: FormValues = {
   partDescription: "",
 };
 
-export function RequestForm() {
+type RequestFormProps = {
+  content?: RequestFormContent;
+};
+
+export function RequestForm({ content = getSiteContent("en").requestForm }: RequestFormProps) {
   const [values, setValues] = useState<FormValues>(initialValues);
   const [errors, setErrors] = useState<Partial<Record<keyof FormValues, string>>>({});
   const [submitted, setSubmitted] = useState(false);
@@ -35,19 +39,19 @@ export function RequestForm() {
     const nextErrors: Partial<Record<keyof FormValues, string>> = {};
 
     if (!values.name.trim()) {
-      nextErrors.name = "Please enter your name.";
+      nextErrors.name = content.validation.name;
     }
 
     if (!values.email.trim()) {
-      nextErrors.email = "Please enter your email.";
+      nextErrors.email = content.validation.email;
     }
 
     if (!values.platform.trim()) {
-      nextErrors.platform = "Please choose your vehicle platform.";
+      nextErrors.platform = content.validation.platform;
     }
 
     if (!values.partDescription.trim()) {
-      nextErrors.partDescription = "Please describe the part you need.";
+      nextErrors.partDescription = content.validation.partDescription;
     }
 
     return nextErrors;
@@ -71,14 +75,14 @@ export function RequestForm() {
     <form className="grid gap-5" onSubmit={handleSubmit} noValidate>
       <div className="grid gap-5 sm:grid-cols-2">
         <Field
-          label="Name"
+          label={content.labels.name}
           name="name"
           value={values.name}
           error={errors.name}
           onChange={(value) => updateField("name", value)}
         />
         <Field
-          label="Email"
+          label={content.labels.email}
           name="email"
           type="email"
           value={values.email}
@@ -89,15 +93,16 @@ export function RequestForm() {
 
       <div className="grid gap-5 sm:grid-cols-2">
         <SelectField
-          label="Vehicle platform"
+          label={content.labels.platform}
           name="platform"
           value={values.platform}
           error={errors.platform}
-          options={formOptions.platforms}
+          options={content.options.platforms}
+          placeholder={content.selectPlaceholder}
           onChange={(value) => updateField("platform", value)}
         />
         <Field
-          label="Year / build detail"
+          label={content.labels.year}
           name="year"
           value={values.year}
           error={errors.year}
@@ -106,16 +111,17 @@ export function RequestForm() {
       </div>
 
       <SelectField
-        label="Urgency"
+        label={content.labels.urgency}
         name="urgency"
         value={values.urgency}
         error={errors.urgency}
-        options={formOptions.urgency}
+        options={content.options.urgency}
+        placeholder={content.selectPlaceholder}
         onChange={(value) => updateField("urgency", value)}
       />
 
       <TextAreaField
-        label="Part description"
+        label={content.labels.partDescription}
         name="partDescription"
         value={values.partDescription}
         error={errors.partDescription}
@@ -124,21 +130,19 @@ export function RequestForm() {
 
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <p className="max-w-md text-sm leading-7 text-muted">
-          This form is a frontend-only request draft in v1. Submitting shows a mock confirmation and
-          does not transmit your details anywhere yet.
+          {content.helperText}
         </p>
         <button
           type="submit"
           className="inline-flex min-h-11 items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-black transition hover:brightness-110"
         >
-          Submit Request
+          {content.submitLabel}
         </button>
       </div>
 
       {submitted ? (
         <p className="rounded-2xl border border-accent/40 bg-accent/10 px-4 py-3 text-sm text-foreground">
-          Request draft saved locally for review. This is a mock success state for the frontend-only
-          experience.
+          {content.successMessage}
         </p>
       ) : null}
     </form>
@@ -178,9 +182,18 @@ function Field({ label, name, value, error, type = "text", onChange }: FieldProp
 
 type SelectFieldProps = FieldProps & {
   options: readonly string[];
+  placeholder: string;
 };
 
-function SelectField({ label, name, value, error, options, onChange }: SelectFieldProps) {
+function SelectField({
+  label,
+  name,
+  value,
+  error,
+  options,
+  placeholder,
+  onChange,
+}: SelectFieldProps) {
   return (
     <label className="grid gap-2 text-sm text-foreground">
       <span className="uppercase tracking-[0.18em] text-muted">{label}</span>
@@ -192,7 +205,7 @@ function SelectField({ label, name, value, error, options, onChange }: SelectFie
         aria-invalid={error ? "true" : "false"}
         aria-describedby={error ? `${name}-error` : undefined}
       >
-        <option value="">Select an option</option>
+        <option value="">{placeholder}</option>
         {options.map((option) => (
           <option key={option} value={option}>
             {option}

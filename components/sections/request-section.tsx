@@ -4,9 +4,10 @@ import type { SiteContent } from "@/lib/site";
 
 type RequestSectionProps = {
   content: SiteContent["requestSection"];
+  formContent: SiteContent["requestForm"];
 };
 
-export function RequestSection({ content }: RequestSectionProps) {
+export function RequestSection({ content, formContent }: RequestSectionProps) {
   return (
     <section id="request" className="section-shell section-padding">
       <div className="grid gap-8 lg:grid-cols-[0.78fr_1.22fr]">
@@ -24,7 +25,7 @@ export function RequestSection({ content }: RequestSectionProps) {
 
         <Reveal delay={0.08}>
           <div className="surface-panel rounded-[1.75rem] p-6 sm:p-8">
-            <RequestForm />
+            <RequestForm content={formContent} />
           </div>
         </Reveal>
       </div>
