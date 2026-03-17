@@ -54,21 +54,21 @@ export const supportedPlatforms = [
     years: "356 to air-cooled 911",
     summary: "Small-batch reproduction support for iconic rear-engined platforms.",
     image: "/images/platform-porsche.jpg",
-    alt: "Classic Porsche parked indoors with race number livery.",
+    alt: "Blue Porsche 356 coupe photographed at a classic motoring event.",
   },
   {
     name: "Mercedes-Benz",
     years: "Pagoda to W123",
     summary: "Precision metalwork for touring coupes, saloons, and long-life restorations.",
     image: "/images/platform-mercedes.jpg",
-    alt: "Classic Mercedes-Benz parked on a city street.",
+    alt: "Green Mercedes-Benz W123 saloon parked in a grassy roadside setting.",
   },
   {
     name: "BMW",
     years: "Neue Klasse to E24",
     summary: "Measured replacement paths for rare trim supports, brackets, and housings.",
     image: "/images/platform-bmw.jpg",
-    alt: "Classic BMW coupe photographed in a studio-like setting.",
+    alt: "Red BMW 2002 photographed at a classic car gathering.",
   },
   {
     name: "Alfa Romeo",
@@ -92,7 +92,7 @@ export const exampleParts = [
     note: "Re-machined for small-batch restoration work where catalog stock no longer exists.",
     process: "Reverse engineering, machining, deburring",
     image: "/images/example-part-2.jpg",
-    alt: "A senior craftsperson sharpening a piece of metal in a workshop.",
+    alt: "Close-up of a CNC milling head machining a small metal component.",
   },
 ] as const;
 
