@@ -1,6 +1,6 @@
 ## OldPart Precision
 
-Single-page `Next.js` landing page for a heritage automotive precision-parts brand.
+Localized `Next.js` landing page for a heritage automotive precision-parts brand.
 
 ## Local Setup
 
@@ -15,6 +15,18 @@ Start the development server:
 ```bash
 pnpm dev
 ```
+
+## Routes
+
+- `/` redirects to `/de`
+- `/de` is the primary German landing page
+- `/en` is the English landing page
+
+## Localized Content
+
+- Shared route handling lives under `app/[locale]/`
+- Localized copy lives in `lib/content/de.ts` and `lib/content/en.ts`
+- Locale helpers and lookup logic live in `lib/i18n.ts` and `lib/site.ts`
 
 Run the verification commands:
 
