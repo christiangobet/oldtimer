@@ -34,6 +34,31 @@ Excluded:
 - Preserve accessibility, performance, and responsive clarity
 - Keep the page original while staying in the same visual family as the inspiration
 
+## Visual Contract Checklist
+
+- [ ] Dark palette tokens remain the source of truth in `app/globals.css`:
+  - `--background: #070707`
+  - `--surface: #121212`
+  - `--surface-strong: #171717`
+  - `--foreground: #f2eee6`
+  - `--muted: #a79f90`
+  - `--accent: #c7a86a`
+  - `--border: rgba(199, 168, 106, 0.18)`
+- [ ] Typography roles stay consistent:
+  - display headlines use the premium serif face only
+  - section labels, body copy, navigation, and controls use the clean sans face
+  - body copy targets comfortable editorial reading width and line-height
+  - supporting metadata stays smaller and quieter than core content
+- [ ] Spacing follows an 8px-derived rhythm:
+  - `8, 16, 24, 32, 48, 64, 96, 128`
+  - sections use generous vertical spacing with tighter inner card rhythm
+  - hero and request sections get the largest spacing allocations
+- [ ] Animation constraints are fixed before section work:
+  - only opacity and transform-based reveals for routine section motion
+  - hover motion stays subtle and under roughly 200ms
+  - page-load motion is staggered but restrained
+  - `prefers-reduced-motion` preserves full content visibility with near-static presentation
+
 ## Information Architecture
 
 The homepage should include the following sections in this order:
