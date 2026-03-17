@@ -110,6 +110,8 @@ export type SiteContent = {
   footer: {
     name: string;
     description: string;
+    tagline: string;
+    backToTop: string;
   };
   languageToggle: {
     activeLabel: string;

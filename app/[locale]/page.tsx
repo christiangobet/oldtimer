@@ -63,14 +63,12 @@ export default async function LocalizedPage({ params }: LocalizedPageProps) {
           </nav>
         </div>
         <div className="mt-8 flex flex-col gap-2 border-t border-border/40 pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs text-muted/60">
-            Every request reviewed personally. Small-volume by design.
-          </p>
+          <p className="text-xs text-muted/60">{content.footer.tagline}</p>
           <a
             href="#top"
             className="text-xs uppercase tracking-[0.22em] text-muted/60 transition hover:text-accent"
           >
-            Back to top ↑
+            {content.footer.backToTop}
           </a>
         </div>
       </footer>

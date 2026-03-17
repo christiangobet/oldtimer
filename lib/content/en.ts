@@ -195,6 +195,8 @@ export const enContent: SiteContent = {
   footer: {
     name: "OldPart Precision",
     description: "Precision-led remanufacturing for rare heritage vehicle components.",
+    tagline: "Every request reviewed personally. Small-volume by design.",
+    backToTop: "Back to top ↑",
   },
   languageToggle: {
     activeLabel: "English",

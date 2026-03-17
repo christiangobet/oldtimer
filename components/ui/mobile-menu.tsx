@@ -11,12 +11,17 @@ type MobileMenuProps = {
 export function MobileMenu({ navigationLinks, ctaLabel }: MobileMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
 
-  // Close menu on route change / hash navigation
+  // Close menu on route change / hash navigation, or Escape key
   useEffect(() => {
     if (!isOpen) return;
     const close = () => setIsOpen(false);
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") close(); };
     window.addEventListener("hashchange", close);
-    return () => window.removeEventListener("hashchange", close);
+    window.addEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("hashchange", close);
+      window.removeEventListener("keydown", onKey);
+    };
   }, [isOpen]);
 
   // Prevent body scroll when open

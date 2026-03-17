@@ -198,6 +198,8 @@ export const deContent: SiteContent = {
     name: "OldPart Precision",
     description:
       "Präzisionsorientiertes Remanufacturing für seltene Komponenten historischer Fahrzeuge.",
+    tagline: "Jede Anfrage persönlich geprüft. Kleine Stückzahlen – by design.",
+    backToTop: "Nach oben ↑",
   },
   languageToggle: {
     activeLabel: "Deutsch",
