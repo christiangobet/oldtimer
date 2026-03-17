@@ -103,6 +103,8 @@ export type SiteContent = {
   requestForm: RequestFormContent;
   sustainabilitySection: SectionCopy & {
     ctaLabel: string;
+    image: string;
+    imageAlt: string;
   };
   sustainabilityBullets: readonly string[];
   footer: {

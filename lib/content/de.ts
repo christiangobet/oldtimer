@@ -186,6 +186,8 @@ export const deContent: SiteContent = {
     description:
       "Durchdachtes Remanufacturing hilft Besitzern, seltene Fahrzeuge zu erhalten, Abfall zu reduzieren und originale Systeme nicht zu früh aus dem Verkehr zu ziehen.",
     ctaLabel: "Anfrage starten",
+    image: "/images/sustainability-cnc-mill.jpg",
+    imageAlt: "Computergesteuerte Fräsmaschine in einer Präzisionswerkstatt.",
   },
   sustainabilityBullets: [
     "Die Reparatur schwer beschaffbarer Komponenten hält originale Fahrzeuge länger auf der Strasse.",

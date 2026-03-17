@@ -16,8 +16,8 @@ export function SustainabilitySection({ content, bullets }: SustainabilitySectio
         <Reveal>
           <div className="relative min-h-[26rem] overflow-hidden rounded-[2rem] border border-border">
             <Image
-              src="/images/sustainability-workshop.jpg"
-              alt="Craftsperson working carefully in a warm workshop environment."
+              src={content.image}
+              alt={content.imageAlt}
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 48vw"

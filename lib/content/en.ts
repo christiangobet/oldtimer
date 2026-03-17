@@ -184,6 +184,8 @@ export const enContent: SiteContent = {
     description:
       "Thoughtful remanufacturing helps owners save rare vehicles, reduce waste, and avoid retiring original systems too early.",
     ctaLabel: "Start the Request",
+    image: "/images/sustainability-cnc-mill.jpg",
+    imageAlt: "Computer-controlled milling machine in a precision workshop.",
   },
   sustainabilityBullets: [
     "Repairing difficult-to-source components keeps original vehicles on the road longer.",

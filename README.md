@@ -50,4 +50,5 @@ Imagery in `public/images/` comes from a mix of Pexels and Wikimedia Commons. Ve
 | `platform-alfa-heritage.jpg` | `https://www.pexels.com/photo/red-vintage-car-outdoors-31024744/` | Pexels page source |
 | `example-part-1.jpg` | `https://www.pexels.com/photo/a-person-measuring-a-rail-36003972/` | Pexels page source |
 | `example-part-2.jpg` | `https://commons.wikimedia.org/wiki/File:CNC_milling_machine.jpg` | Wikimedia Commons, CC0 |
+| `sustainability-cnc-mill.jpg` | `https://commons.wikimedia.org/wiki/File:CNC_Mill_(3964417019).jpg` | Wikimedia Commons, CC0 |
 | `sustainability-workshop.jpg` | `https://commons.wikimedia.org/wiki/File:Lathe_workshop.jpg` | Wikimedia Commons, CC0 |
