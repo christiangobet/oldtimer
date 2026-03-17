@@ -24,6 +24,7 @@ export function PlatformsSection() {
                   alt={platform.alt}
                   fill
                   className="object-cover transition duration-500 group-hover:scale-105"
+                  style={{ objectPosition: platform.imagePosition }}
                   sizes="(max-width: 1024px) 100vw, 44vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
