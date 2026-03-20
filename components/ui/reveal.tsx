@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
-import { motion, useInView, useReducedMotion } from "framer-motion";
 
 type RevealProps = {
   children: ReactNode;
@@ -11,6 +10,18 @@ type RevealProps = {
   distance?: number;
 };
 
+/**
+ * Reveal — scroll-triggered entrance animation.
+ *
+ * Strategy:
+ * 1. SSR / pre-hydration: renders a plain <div>, content fully visible.
+ * 2. After hydration, elements already in the viewport stay visible (no animation).
+ * 3. Elements below the fold are hidden immediately (no transition), then revealed
+ *    with a CSS transition when they enter the viewport via IntersectionObserver.
+ *
+ * This eliminates the race condition where switching to a Framer Motion element with
+ * `initial={{ opacity: 0 }}` leaves content invisible while waiting for isInView.
+ */
 export function Reveal({
   children,
   className,
@@ -18,30 +29,69 @@ export function Reveal({
   distance = 24,
 }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const prefersReducedMotion = useReducedMotion();
-  // Only enable animations after client hydration.
-  // Before hydration, render content visible — this prevents Safari (and slow
-  // JS environments) from getting stuck on opacity:0 if the IntersectionObserver
-  // fires before React's first paint cycle completes.
-  const [hydrated, setHydrated] = useState(false);
-  useEffect(() => { setHydrated(true); }, []);
+  // true = fully visible (no animation), false = hidden, waiting to animate in
+  const [visible, setVisible] = useState(true);
+  // only apply transition after first reveal (prevents transition on initial hide)
+  const [animate, setAnimate] = useState(false);
 
-  const isInView = useInView(ref, { once: true, amount: 0, margin: "0px 0px 120px 0px" });
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
 
-  // Before JS hydration or reduced-motion: show immediately, no animation
-  if (!hydrated || prefersReducedMotion) {
-    return <div className={className}>{children}</div>;
-  }
+    // Respect user preference — leave visible, no animation
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const rect = el.getBoundingClientRect();
+    // Already in viewport at hydration time — no animation needed
+    if (rect.top < window.innerHeight) return;
+
+    // Below the fold: hide instantly (no transition yet), then observe
+    setVisible(false);
+
+    let observer: IntersectionObserver | null = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Two rAFs: first ensures browser has painted the hidden state,
+          // second triggers the CSS transition from hidden → visible.
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              setAnimate(true);
+              setVisible(true);
+            });
+          });
+          observer?.disconnect();
+          observer = null;
+        }
+      },
+      { rootMargin: "0px 0px 120px 0px" }
+    );
+    observer.observe(el);
+
+    return () => {
+      observer?.disconnect();
+    };
+  }, []);
 
   return (
-    <motion.div
+    <div
       ref={ref}
       className={className}
-      initial={{ opacity: 0, y: distance }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: distance }}
-      transition={{ duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] }}
+      style={
+        animate || visible
+          ? {
+              opacity: visible ? 1 : 0,
+              transform: visible ? "translateY(0px)" : `translateY(${distance}px)`,
+              transition: animate
+                ? `opacity 0.65s cubic-bezier(0.22,1,0.36,1) ${delay}s, transform 0.65s cubic-bezier(0.22,1,0.36,1) ${delay}s`
+                : "none",
+            }
+          : {
+              opacity: 0,
+              transform: `translateY(${distance}px)`,
+            }
+      }
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
